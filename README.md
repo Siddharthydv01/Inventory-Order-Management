@@ -8,6 +8,17 @@ A full-stack Inventory & Order Management System built with **FastAPI**, **React
 
 ---
 
+## 🚀 Live Deployment
+
+| Component | URL |
+|-----------|-----|
+| **Frontend** | https://frontend-rose-one-14.vercel.app |
+| **Backend API** | https://inventory-api-qjm4.onrender.com/api |
+| **GitHub Repository** | https://github.com/Siddharthydv01/Inventory-Order-Management |
+| **Docker Image** | https://hub.docker.com/r/siddharthydv/inventory-order-backend |
+
+---
+
 ## Features
 
 - **Products Management** — Full CRUD with unique SKU enforcement and stock tracking
@@ -22,168 +33,249 @@ A full-stack Inventory & Order Management System built with **FastAPI**, **React
 
 | Layer | Technology |
 |---|---|
-| Backend | FastAPI, SQLAlchemy, Pydantic |
-| Frontend | React 19, Vite, React Router, Axios |
-| Database | PostgreSQL 15 |
-| Styling | Vanilla CSS (custom design system) |
-| Icons | Lucide React |
-| Infrastructure | Docker, Docker Compose |
-| Deployment | Render (API), Vercel (UI), Neon (DB) |
-
----
-
-## Quick Start
-
-### Prerequisites
-
-- Python 3.11+
-- Node.js 20+
-- PostgreSQL 15+ (or Docker)
-
-### Option 1: Docker Compose (Recommended)
-
-```bash
-# Clone the repository
-git clone https://github.com/Siddharthydv01/Inventory-Order-Management.git
-cd Inventory-Order-Management
-
-# Start all services
-docker-compose up --build
-```
-
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Docs (Swagger)**: http://localhost:8000/docs
-
-### Option 2: Local Development
-
-**Backend:**
-
-```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # macOS/Linux
-
-pip install -r requirements.txt
-
-# Start the API server
-uvicorn app.main:app --reload --port 8000
-```
-
-**Frontend:**
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Environment Variables
-
-Copy `.env.example` to `.env` and configure:
-
-```env
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/inventory_db
-CORS_ORIGINS=http://localhost:5173,http://localhost:3000
-```
-
----
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/health` | Health check |
-| GET | `/api/products/` | List all products |
-| POST | `/api/products/` | Create product |
-| GET | `/api/products/{id}` | Get product |
-| PUT | `/api/products/{id}` | Update product |
-| DELETE | `/api/products/{id}` | Delete product |
-| GET | `/api/customers/` | List all customers |
-| POST | `/api/customers/` | Create customer |
-| GET | `/api/customers/{id}` | Get customer |
-| PUT | `/api/customers/{id}` | Update customer |
-| DELETE | `/api/customers/{id}` | Delete customer |
-| GET | `/api/orders/` | List all orders |
-| POST | `/api/orders/` | Create order |
-| GET | `/api/orders/{id}` | Get order |
-
----
-
-## Deployment
-
-### Backend → Render
-
-1. Create a new **Web Service** on [Render](https://render.com).
-2. Connect your GitHub repository.
-3. Set **Root Directory** to `backend`.
-4. Set **Build Command**: `pip install -r requirements.txt`
-5. Set **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-6. Add environment variables: `DATABASE_URL`, `CORS_ORIGINS`.
-
-### Frontend → Vercel
-
-1. Import the project on [Vercel](https://vercel.com).
-2. Set **Root Directory** to `frontend`.
-3. Set **Build Command**: `npm run build`
-4. Set **Output Directory**: `dist`
-5. Add environment variable: `VITE_API_URL=https://your-render-backend.onrender.com/api`
-
-### Database → Neon
-
-1. Create a project on [Neon](https://neon.tech).
-2. Copy the connection string.
-3. Set it as `DATABASE_URL` in your Render environment variables.
+| **Backend** | FastAPI 0.115.0, SQLAlchemy 2.0, Pydantic 2.9 |
+| **Frontend** | React 19, Vite, React Router, Axios |
+| **Database** | PostgreSQL 15 (Render) |
+| **Styling** | Vanilla CSS (custom design system) |
+| **Icons** | Lucide React |
+| **Containerization** | Docker, Docker Hub |
+| **Deployment** | Render (Backend), Vercel (Frontend) |
 
 ---
 
 ## Project Structure
 
 ```
+Inventory-Order-Management/
 ├── backend/
-│   ├── app/
-│   │   ├── main.py          # FastAPI entry point
-│   │   ├── config.py        # Settings
-│   │   ├── database.py      # SQLAlchemy setup
-│   │   ├── models.py        # ORM models
-│   │   ├── schemas.py       # Pydantic schemas
-│   │   └── routers/
-│   │       ├── products.py
-│   │       ├── customers.py
-│   │       └── orders.py
-│   ├── requirements.txt
-│   └── Dockerfile
-├── frontend/
-│   ├── src/
-│   │   ├── api/client.js
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.jsx
-│   │   └── index.css
 │   ├── Dockerfile
-│   └── vercel.json
-├── docker-compose.yml
-├── render.yaml
-├── .env.example
+│   ├── requirements.txt
+│   └── app/
+│       ├── main.py
+│       ├── config.py
+│       ├── database.py
+│       ├── models.py
+│       ├── schemas.py
+│       └── routers/
+│           ├── products.py
+│           ├── customers.py
+│           └── orders.py
+│
+├── frontend/
+│   ├── Dockerfile
+│   ├── vite.config.js
+│   ├── vercel.json
+│   ├── package.json
+│   ├── index.html
+│   └── src/
+│       ├── main.jsx
+│       ├── App.jsx
+│       ├── api/
+│       │   └── client.js
+│       ├── components/
+│       │   ├── Layout.jsx
+│       │   ├── DataTable.jsx
+│       │   ├── Modal.jsx
+│       │   ├── Sidebar.jsx
+│       │   └── StatusBadge.jsx
+│       └── pages/
+│           ├── Dashboard.jsx
+│           ├── Products.jsx
+│           ├── Customers.jsx
+│           └── Orders.jsx
+│
+├── .github/
+│   └── workflows/
+│       └── docker-publish.yml
+│
 └── README.md
 ```
 
 ---
 
-## License
+## Quick Start (Local Development)
 
-MIT
+### Prerequisites
+- Python 3.11+
+- Node.js 20+
+- PostgreSQL 15+ (or Docker)
+
+### Backend Setup
+
+```bash
+# Navigate to backend directory
+cd backend
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set environment variables
+export DATABASE_URL="postgresql://user:password@localhost/inventory_db"
+export CORS_ORIGINS="http://localhost:5173"
+
+# Run migrations and start server
+uvicorn app.main:app --reload
+```
+
+Backend runs on `http://localhost:8000`
+
+### Frontend Setup
+
+```bash
+# Navigate to frontend directory
+cd frontend
+
+# Install dependencies
+npm install
+
+# Set environment variable
+export VITE_API_URL="http://localhost:8000/api"
+
+# Start development server
+npm run dev
+```
+
+Frontend runs on `http://localhost:5173`
 
 ---
 
-## Repository
+## Docker Deployment
 
-- **GitHub:** https://github.com/Siddharthydv01/Inventory-Order-Management.git
-- **Push a tag:**
+### Build Backend Image
 
 ```bash
-# create a tag (example)
-git tag v1.0.0
-git push origin v1.0.0
+docker build -t siddharthydv/inventory-order-backend:latest -f backend/Dockerfile backend/
+docker tag siddharthydv/inventory-order-backend:latest siddharthydv/inventory-order-backend:v1.0.0
 ```
+
+### Push to Docker Hub
+
+```bash
+docker push siddharthydv/inventory-order-backend:latest
+docker push siddharthydv/inventory-order-backend:v1.0.0
+```
+
+### Pull and Run
+
+```bash
+docker pull siddharthydv/inventory-order-backend:latest
+docker run -p 8000:8000 \
+  -e DATABASE_URL="postgresql://..." \
+  -e CORS_ORIGINS="https://your-frontend-url" \
+  siddharthydv/inventory-order-backend:latest
+```
+
+---
+
+## API Endpoints
+
+### Products
+- `GET /api/products/` - List all products (with search)
+- `GET /api/products/{id}` - Get product by ID
+- `POST /api/products/` - Create new product
+- `PUT /api/products/{id}` - Update product
+- `DELETE /api/products/{id}` - Delete product
+
+### Customers
+- `GET /api/customers/` - List all customers (with search)
+- `GET /api/customers/{id}` - Get customer by ID
+- `POST /api/customers/` - Create new customer
+- `PUT /api/customers/{id}` - Update customer
+- `DELETE /api/customers/{id}` - Delete customer
+
+### Orders
+- `GET /api/orders/` - List all orders (with pagination)
+- `GET /api/orders/{id}` - Get order by ID
+- `POST /api/orders/` - Create new order
+- `PUT /api/orders/{id}` - Update order status
+- `DELETE /api/orders/{id}` - Delete order
+
+---
+
+## Environment Variables
+
+### Backend
+```env
+DATABASE_URL=postgresql://inventory_db_my9r_user:WZbmWV2wEYTvHYnozJQhSElDGB2T9fkJ@dpg-d8lv516q1p3s739tlupg-a/inventory_db_my9r
+CORS_ORIGINS=https://frontend-rose-one-14.vercel.app
+```
+
+### Frontend
+```env
+VITE_API_URL=https://inventory-api-qjm4.onrender.com/api
+```
+
+---
+
+## CI/CD Pipeline
+
+GitHub Actions workflow automatically builds and pushes Docker images on every push to `main` branch.
+
+**Workflow file:** `.github/workflows/docker-publish.yml`
+
+**Required Secrets:**
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN`
+
+---
+
+## Database Schema
+
+### Products Table
+- `id` (UUID, Primary Key)
+- `sku` (String, Unique)
+- `name` (String)
+- `description` (Text)
+- `price` (Decimal)
+- `stock_quantity` (Integer)
+- `created_at` (Timestamp)
+- `updated_at` (Timestamp)
+
+### Customers Table
+- `id` (UUID, Primary Key)
+- `name` (String)
+- `email` (String, Unique)
+- `phone` (String)
+- `address` (Text)
+- `created_at` (Timestamp)
+- `updated_at` (Timestamp)
+
+### Orders Table
+- `id` (UUID, Primary Key)
+- `customer_id` (UUID, Foreign Key)
+- `order_date` (Timestamp)
+- `status` (Enum: pending, processing, shipped, delivered, cancelled)
+- `total_amount` (Decimal)
+- `created_at` (Timestamp)
+- `updated_at` (Timestamp)
+
+### Order Items Table
+- `id` (UUID, Primary Key)
+- `order_id` (UUID, Foreign Key)
+- `product_id` (UUID, Foreign Key)
+- `quantity` (Integer)
+- `unit_price` (Decimal)
+- `created_at` (Timestamp)
+
+---
+
+## License
+
+This project is licensed under the **MIT License** — see LICENSE file for details.
+
+---
+
+## Author
+
+**Siddharth Yadav**  
+GitHub: [@Siddharthydv01](https://github.com/Siddharthydv01)
+
+---
+
+## Support
+
+For issues, questions, or contributions, please open an issue on the [GitHub repository](https://github.com/Siddharthydv01/Inventory-Order-Management).
